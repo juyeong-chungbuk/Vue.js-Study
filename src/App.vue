@@ -1,7 +1,12 @@
 <template>
-  <div class="start">
-    <Modal @closeModal="모달창열렸니=false;" :원룸들="원룸들" :clicked="clicked" :모달창열렸니="모달창열렸니" />
-  </div>
+  <transition name="fade">
+     <Modal @closeModal="모달창열렸니=false" 
+     :원룸들="원룸들" :clicked="clicked" 
+     :모달창열렸니="모달창열렸니" />
+  </transition>
+  <!-- <div class="start" :class="{ end : 모달창열렸니 }">
+    <Modal @closeModal="모달창열렸니=false" :원룸들="원룸들" :clicked="clicked" :모달창열렸니="모달창열렸니" />
+  </div> -->
     <div class="menu">
         <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
         <!-- <a href="">Products</a> <a href="">About</a> -->
@@ -49,6 +54,25 @@
 </script>
 
 <style>
+  /* .start{
+    opacity: 0;
+    transition: all 1s; 
+  }
+  .end{
+    opacity: 1;
+  } */
+  /* 시작 시 스타일 */
+  .fade-enter-from{
+    opacity: 0;
+  }
+  /*  */
+  .fade-enter-active{
+    transition: all 1s;
+  }
+  /* 끝날 시 스타일 */
+  .fade-enter-to{
+    opacity: 1;
+  }
   body{
     margin: 0;
   }
