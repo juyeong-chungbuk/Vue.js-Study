@@ -17,6 +17,11 @@ export default {
     name : 'Product',
     props : {
         원룸 : Object,
+    },
+    methods : {
+        함수(){
+            this.$emit('openModal', this.원룸.id) //emit을 함수안에서 하고싶으면
+        }   //데이터를 함수안에서 참조할 때는 this 필수!
     }
 }
 </script>
