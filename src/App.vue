@@ -12,7 +12,9 @@
         <!-- <a href="">Products</a> <a href="">About</a> -->
     </div>
 
-    <Discount :이름="오브젝트.name" :나미="오브젝트.age" />
+    <Discount v-if="showDiscount == true" />
+    <button @click="priceSort">가격순정렬</button>
+    <button @click="sortBack">되돌리기</button>
     <Card @openModal="모달창열렸니=true; clicked=$event" :원룸="원룸들[i]" v-for="(원룸,i) in 원룸들" :key="i" />
 </template>
 
@@ -22,10 +24,17 @@
   import Modal from './Modal.vue';
   import Card from './Card.vue';
 
+  setTimeout(function(){
+    //실행할 코드
+  }, 2000);
+
   export default {
       name: 'App',
       data() {    // 데이터 보관하는 법
         return {
+          sale : 30,
+          showDiscount : true,
+          원룸들오리지널 : [...data],
           오브젝트 : { name : 'Kim', age : 20 },
           clicked: 0,
           원룸들 : data,
@@ -44,7 +53,20 @@
         increase(){
           this.신고수+= 1;
         },
+        priceSort(){
+          this.원룸들.sort(function(a, b){
+            return a.price-b.price;
+          });
+        },
+        sortBack(){
+          this.원룸들 = [...this.원룸들오리지널];
+        },
       },
+      // mounted() {
+      //   setTimeout(()=>{
+      //     this.showDiscount = false;
+      //   }, 2000);
+      // },
       components: {
         Discount : Discount, // 같은 이름으로 쓸거면 Discount 하나만 써도 가능
         Modal : Modal,
@@ -61,9 +83,20 @@
   .end{
     opacity: 1;
   } */
+  .fade-leave-from{
+    opacity: 1;
+  }
+  .fade-leave-active{
+    transition: all 1s;
+  }
+  .fade-leave-to{
+    opacity: 0;
+  }
+
   /* 시작 시 스타일 */
   .fade-enter-from{
-    opacity: 0;
+    /* opacity: 0; */
+    transform: translateY(-1000px);
   }
   /*  */
   .fade-enter-active{
@@ -71,7 +104,8 @@
   }
   /* 끝날 시 스타일 */
   .fade-enter-to{
-    opacity: 1;
+    /* opacity: 1; */
+    transform: translateY(0px);
   }
   body{
     margin: 0;
