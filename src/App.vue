@@ -6,8 +6,8 @@
         <!-- <a href="">Products</a> <a href="">About</a> -->
     </div>
 
-    <Discount/>
-    <Product :원룸들="원룸들" :신고수="신고수" :모달창열렸니="모달창열렸니"/>
+    <Discount :이름="오브젝트.name" :나미="오브젝트.age" />
+    <Card @openModal="모달창열렸니=true; clicked=$event" :원룸="원룸들[i]" v-for="(원룸,i) in 원룸들" :key="i" />
 
     <!-- <div v-for="(원룸,i) in 원룸들" :key="i">
         <img :src="원룸들[i].image" class="room-img">
@@ -28,12 +28,13 @@
   import data from './assets/oneroom.js'; // .js는 생략가능
   import Discount from './Discount.vue';
   import Modal from './Modal.vue';
-  import Product from './Product.vue';
+  import Card from './Card.vue';
 
   export default {
       name: 'App',
       data() {    // 데이터 보관하는 법
         return {
+          오브젝트 : { name : 'Kim', age : 20 },
           clicked: 0,
           원룸들 : data,
           모달창열렸니 : false, // 모달창의 현재 상태를 보관하는 데이터 - 닫힌상태 or 열린상태
@@ -55,7 +56,7 @@
       components: {
         Discount : Discount, // 같은 이름으로 쓸거면 Discount 하나만 써도 가능
         Modal : Modal,
-        Product : Product,
+        Card : Card,
       }
   } // data, methods, components 각각 따로 있는 구조임
 </script>

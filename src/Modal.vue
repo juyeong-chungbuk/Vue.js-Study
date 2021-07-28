@@ -3,6 +3,7 @@
       <div class="white-bg">
           <h4>{{ 원룸들[clicked].title }}</h4>
           <p>{{ 원룸들[clicked].content }}</p>
+          <p>{{ 원룸들[clicked].price }}</p>
           <Discount/>
           <!-- <button @click="모달창열렸니 = false">닫기</button> -->
       </div>
